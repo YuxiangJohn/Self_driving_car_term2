@@ -1,7 +1,7 @@
 # Extended Kalman Filter
 
 ![model](./graph/1.png)
-![model](./graph/2.png)
+
 Red circles are lidar measurements. Blue circles are radar measurements. Green points are the estimated locations of the car.
 
 Utilize a kalman filter to estimate the state of a moving object of interest with noisy lidar and radar measurements.  
