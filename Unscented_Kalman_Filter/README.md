@@ -22,6 +22,32 @@ OUTPUT: values provided by the c++ program to the simulator
 ["rmse_vy"]
 
 ---
+## Results
+Residual error is calculated by mean squared error (MSE).
+
+| Input      | MSE| Requirement (less than) |
+| :--------:   | :-----:   | :----:|
+| px         | 0.0794   | 0.09   |
+| py         | 0.0856   | 0.10    | 
+| vx         | 0.2580   | 0.40    | 
+| vy         | 0.1595   | 0.30    | 
+
+
+
+### Comparisons
+I included the results of only running one sensor ar a time (lidar or radar). as well as the results of my previous [Extended Kalman Filter](https://github.com/YuxiangJohn/Self_driving_car_term2/tree/master/Extended_Kalman_Filter) for the same dataset. As expected, the UKF combined with both of two sensors is the most accurate (lowest MSE) of this result.
+
+| Input      | UKF-Fused| UKF-Lidar | UKF-radar| EKF-Fused |
+| :--------:   | :-----:   |  :-----:  | :-----:  | :------:  |
+| px         | 0.0794   | 0.1057    | 0.1570   | 0.0973    |
+| py         | 0.0856   | 0.0946    | 0.2043   | 0.0855    |
+| vx         | 0.2580   | 0.6033    | 0.2843   | 0.4513    |
+| vy         | 0.1595   | 0.1936    | 0.2202   | 0.4399    |
+
+Compared to EKF, UKF is outstanding when predicting velocity.
+
+
+
 
 ## Dependency and Compiling
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
