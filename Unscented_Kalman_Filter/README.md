@@ -15,10 +15,15 @@ INPUT: values provided by the simulator to the c++ program
 OUTPUT: values provided by the c++ program to the simulator
 
 ["estimate_x"] <= kalman filter estimated position x
+
 ["estimate_y"] <= kalman filter estimated position y
+
 ["rmse_x"]
+
 ["rmse_y"]
+
 ["rmse_vx"]
+
 ["rmse_vy"]
 
 ---
