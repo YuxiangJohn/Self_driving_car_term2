@@ -26,7 +26,7 @@ OUTPUT: values provided by the c++ program to the simulator
 
 ["rmse_vy"]
 
----
+
 ## Results
 Residual error is calculated by mean squared error (MSE).
 
@@ -52,7 +52,7 @@ I included the results of only running one sensor ar a time (lidar or radar). as
 Compared to EKF, UKF is outstanding when predicting velocity.
 
 
-
+---
 
 ## Dependency and Compiling
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
