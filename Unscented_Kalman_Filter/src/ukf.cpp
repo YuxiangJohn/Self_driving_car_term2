@@ -63,7 +63,6 @@ UKF::UKF() {
   n_aug_ = 7;
 
   ///* Sigma point spreading parameter
-  //lambda_ = 3 - n_x_;
   lambda_ = 0;
 
   // initial predicted sigma points matrix
