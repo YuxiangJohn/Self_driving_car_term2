@@ -1,9 +1,13 @@
 # CarND-Controls-PID
 
-![model](./graph/system.png)
+<img src="./graph/result.gif">
+
 ---
 
 ## PID system
+
+<img src="./graph/system.PNG" width="50%" height="50%">
+
 A PID controller is actually a three part system: 
 
 * Proportional compensation: the main function of the proportional compensator is to introduce a gain that is proportional to the error reading which is produced by comparing the system's output and input.  
@@ -16,7 +20,7 @@ Kd
 Ki
 .  This means that the area under the error signal's curve will be affecting the output signal.  We will prove this later, but it is important to note that this facet of the controller will improve the steady-state error of overall closed-loop system.
 
-In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0). These parameters can run the car safely within the lane.
+In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0). These parameters can run the car safely within the lane with a speed around 30mph.
 
 ### P, I, D Analysis
 
