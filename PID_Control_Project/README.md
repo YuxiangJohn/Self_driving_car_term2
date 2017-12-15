@@ -21,7 +21,7 @@ The effect of three PID parameters are described as following:
 The steer value is calculated as the equation:
 steer_value = -Kp * cte - Kd * diff_cte - Ki * int_cte
 
-In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0) as the parameters in the video. These parameters can run the car safely within the lane with a speed around 30mph.
+In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0). Starting with all three parameters equals to 0, I tuned the Kp firslty. I increased the Kp until the 0.2 when the cte is fairly small. Secondly, I increased Ki until the overshoot problem disappeared a lot when Ki is 0.004. Finally, I set Kd equals to 3.0 and it solved the errors which still existed. These parameters can run the car safely within the lane with a speed around 30mph.
 
 ### P, I, D Analysis
 
