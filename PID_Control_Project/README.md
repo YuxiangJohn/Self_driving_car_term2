@@ -11,11 +11,11 @@
 In this PID system graph, we can see the PID is consist of three parts and contribute to the input of gain. In this project, the input is the steering angle.
 The effect of three PID parameters are described as following: 
 
-* Proportional gain - Kp: multiplied by cross-track error (cte), a pure proportional term computes the proportional to the cte which will lead to the change of steering value. If the cte is larger, the steering value is larger too. But a pure P controller is unstable with the overshoot problem.
+* Proportional gain - Kp: multiplied by cross-track error (cte), a pure proportional term computes the proportional to the cte which will lead to the change of steering value. If the cte is larger, the steering value is larger too. But a pure P controller is unstable with the overshoot problem. In this case, the car will always oscillates in the lane.
  
-* Derivative gain - Kd: the cte is multiplied by the derivative of cte (the rate of change). A D controller plays a role to decrease the overshoot problem. But it has no effect to cte.
+* Derivative gain - Kd: the cte is multiplied by the derivative of cte (the rate of change). A D controller plays a role to decrease the overshoot problem. But it has no effect to cte. If we D controller, the osillation will decrease.
  
-* Integral gain - Ki: the cte is multipied by the intergral of cte. It aims at solve the drift problem by the systematic bias, which means the zero steering doesn't lead to a straight trajectory. By accumulating the cte, I controller can produce a big value to change the final gain in the system when the integral is big.
+* Integral gain - Ki: the cte is multipied by the intergral of cte. It aims at solve the drift problem by the systematic bias, which means the zero steering doesn't lead to a straight trajectory. By accumulating the cte, I controller can produce a big value to change the final gain in the system when the integral is big. After adding the I controller, the cte will decrease and no drift happen.
 
 
 The steer value is calculated as the equation:
