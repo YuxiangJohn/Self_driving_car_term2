@@ -8,27 +8,28 @@
 
 <img src="./graph/system.PNG" width="50%" height="50%">
 
-A PID controller is actually a three part system: 
+In this PID system graph, we can see the PID is consist of three parts and contribute to the input of gain. In this project, the input is the steering angle.
+The effect of three PID parameters are described as following: 
 
-* Proportional compensation: the main function of the proportional compensator is to introduce a gain that is proportional to the error reading which is produced by comparing the system's output and input.  
+* Proportional gain - Kp: multiplied by cross-track error (cte), a pure proportional term computes the proportional to the cte which will lead to the change of steering value. If the cte is larger, the steering value is larger too. But a pure P controller is unstable with the overshoot problem.
  
-* Derivative compensation: in a unitary feedback system, the derivative compensator will introduce the derivative of the error signal multiplied by a gain Kd
-Kd
-.  In other words, the slope of the error signal's waveform is what will introduced to the output. Its main purpose is that of improving the transient response of the overall closed-loop system.
+* Derivative gain - Kd: the cte is multiplied by the derivative of cte (the rate of change). A D controller plays a role to decrease the overshoot problem. But it has no effect to cte.
  
-* Integral compensation: in a unitary feedback system, the integral compensator will introduce the integral of the error signal multiplied by a gain Ki
-Ki
-.  This means that the area under the error signal's curve will be affecting the output signal.  We will prove this later, but it is important to note that this facet of the controller will improve the steady-state error of overall closed-loop system.
+* Integral gain - Ki: the cte is multipied by the intergral of cte. It aims at solve the drift problem by the systematic bias, which means the zero steering doesn't lead to a straight trajectory. By accumulating the cte, I controller can produce a big value to change the final gain in the system when the integral is big.
 
-In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0). These parameters can run the car safely within the lane with a speed around 30mph.
+
+The steer value is calculated as the equation:
+steer_value = -Kp * cte - Kd * diff_cte - Ki * int_cte
+
+In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0) as the parameters in the video. These parameters can run the car safely within the lane with a speed around 30mph.
 
 ### P, I, D Analysis
 
-| CL RESPONSE     | RISE TIME| OVERSHOOT | SETTLING TIME| S-S ERROR |
-| :--------:   | :-----:   |  :-----:  | :-----:  | :------:  |
-| Kp         | Decrease   |Increase    | Small Change   | Decrease    |
-| Ki         | Decrease  | Increase   | Increase   | Decrease    |
-| Kd         | Small Change   | Decrease    | Decrease   | No Change   |
+| PID gain    | Overshoot | CTE|
+| :--------:    |  :-----:  | :------:  |
+| Kp          |Increase       | Decrease    |
+| Ki         | Increase     | Decrease    |
+| Kd           | Decrease      | No Change   |
 
 
 ## Dependencies
