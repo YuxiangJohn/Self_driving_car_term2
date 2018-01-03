@@ -1,9 +1,29 @@
-# CarND-Controls-PID
+# CarND-Controls-Model Predictive Control (MPC)
 
 <img src="./graph/result.gif">
 
 ---
 
+## MPC Description
+I choose N = 10 and dt = 0.1. A larger N value leads to a slower simulation as the computation of the future value increases. dt = 0.1 is the time interval between each predicted point. The predicted time in future is 1s (N * dt = 1s). After playing with other values, I found N = 10 and dt = 0.1 worked better.
+### State
+
+| MPC state    | Description |
+| :--------:    |  :-----:  | 
+| px          | car's position in x coordinate   | 
+| py         | car's position in y coordinate    |
+| psi           | car's heading direction       | 
+| v           | car's velocity       |
+| cte           | cross track error       | 
+| epsi           | orientation error of the car |
+
+### actuators
+|Actuator| description |
+|:----:| :----:|
+| steering angle | range:[-25, 25] (degree) |
+|throttle| speed control:[-1, 1] (from full break to full throttle)|
+
+###
 ## PID system
 
 <img src="./graph/system.PNG" width="50%" height="50%">
@@ -62,17 +82,14 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./pid`. 
+4. Run it: `./mpc`. 
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
 
-## Reference
 
-1. https://innovativecontrols.com/blog/basics-tuning-pid-loops
-2. http://ctms.engin.umich.edu/CTMS/index.php?example=Introduction&section=ControlPID#7
-3. https://www.allaboutcircuits.com/technical-articles/an-introduction-to-control-systems-designing-a-pid-controller-using-matlabs/
-4. https://www.youtube.com/watch?v=4Y7zG48uHRo
+
+
 
 
 
