@@ -1,6 +1,6 @@
 # CarND-Controls-Model Predictive Control (MPC)
 
-<img src="./graph/result.gif">
+<img src="./graph/MPC.gif">
 
 ---
 
