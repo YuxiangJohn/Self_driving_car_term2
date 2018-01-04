@@ -5,11 +5,18 @@
 ---
 
 ## MPC Description
-I choose N = 10 and dt = 0.1. A larger N value leads to a slower simulation as the computation of the future value increases. dt = 0.1 is the time interval between each predicted point. The predicted time in future is 1s (N * dt = 1s). After playing with other values, I found N = 10 and dt = 0.1 worked better.
-### State
+Model predictive control (MPC) is an advanced method of process control. Importantly, MPC is not only the pursuit of control, but also the pursuit of optimal control. Compared with the traditional PID controller, it considers whether the most economical way to control. 
+MPC is an optimization control problem that is devoted to decomposing optimal control problems of longer time span or even infinite time into several shorter time spans or limited time span, and to some extent still pursuing the optimal solution. Under the constraints to reach the goal, MPC finds an way to lower (optimize) the value of cost function. 
+
+In this project, I use MPC to control a car in a simulator, visiualize the path and the predicted waypoints. The optimization considers only a short duration's worth of waypoints. MPC produces a trajectory for that duration based upon a model of the vehicle's kinematics and a cost function based mostly on the vehicle's cross-track error (roughly the distance from the track waypoints) and orientation angle error, with other cost factors included to improve performance.  
+
+I choose N = 10 and dt = 0.1. A larger N value leads to a slower simulation as the computation of the future value increases. dt = 0.1 is the time interval between each predicted point. The predicted time in future is 1s (N * dt = 1s). After playing with other values, I found N = 10 and dt = 0.1 worked better. Before polynomial fitting, the waypoints are transformed from unity coordinates to the vehicle coordinates. I add latency (100ms) to the process so that it can simulate the actual situation.
+
+### Kinematics model
+The car kinematics model is described as following:
 
 | MPC state    | Description |
-| :--------:    |  :-----:  | 
+| :--------   |  :-----  | 
 | px          | car's position in x coordinate   | 
 | py         | car's position in y coordinate    |
 | psi           | car's heading direction       | 
@@ -17,40 +24,17 @@ I choose N = 10 and dt = 0.1. A larger N value leads to a slower simulation as t
 | cte           | cross track error       | 
 | epsi           | orientation error of the car |
 
-### actuators
+The following equation calculate the states in next timestep base on the states in current timestep.
+
+<img src="./graph/eq.png">
+
+### Actuators
 |Actuator| description |
-|:----:| :----:|
+|:----| :----|
 | steering angle | range:[-25, 25] (degree) |
 |throttle| speed control:[-1, 1] (from full break to full throttle)|
 
 ###
-## PID system
-
-<img src="./graph/system.PNG" width="50%" height="50%">
-
-In this PID system graph, we can see the PID is consist of three parts and contribute to the input of gain. In this project, the input is the steering angle.
-The effect of three PID parameters are described as following: 
-
-* Proportional gain - Kp: multiplied by cross-track error (cte), a pure proportional term computes the proportional to the cte which will lead to the change of steering value. If the cte is larger, the steering value is larger too. But a pure P controller is unstable with the overshoot problem. In this case, the car will always oscillates in the lane.
- 
-* Derivative gain - Kd: the cte is multiplied by the derivative of cte (the rate of change). A D controller plays a role to decrease the overshoot problem. But it has no effect to cte. If we D controller, the osillation will decrease.
- 
-* Integral gain - Ki: the cte is multipied by the intergral of cte. It aims at solve the drift problem by the systematic bias, which means the zero steering doesn't lead to a straight trajectory. By accumulating the cte, I controller can produce a big value to change the final gain in the system when the integral is big. After adding the I controller, the cte will decrease and no drift happen.
-
-
-The steer value is calculated as the equation:
-steer_value = -Kp * cte - Kd * diff_cte - Ki * int_cte
-
-In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0). Starting with all three parameters equals to 0, I tuned the Kp firslty. I increased the Kp until the 0.2 when the cte is fairly small. Secondly, I increased Ki until the overshoot problem disappeared a lot when Ki is 0.004. Finally, I set Kd equals to 3.0 and it solved the errors which still existed. These parameters can run the car safely within the lane with a speed around 30mph.
-
-### P, I, D Analysis
-
-| PID gain    | Overshoot | CTE|
-| :--------:    |  :-----:  | :------:  |
-| Kp          |Increase       | Decrease    |
-| Ki         | Increase     | Decrease    |
-| Kd           | Decrease      | No Change   |
-
 
 ## Dependencies
 
@@ -74,7 +58,10 @@ In this project, I used: (Kp, Ki, Kd) = (0.2, 0.004, 3.0). Starting with all thr
     ```
     Some function signatures have changed in v0.14.x. See [this PR](https://github.com/udacity/CarND-MPC-Project/pull/3) for more details.
 * Simulator. You can download these from the [project intro page](https://github.com/udacity/self-driving-car-sim/releases) in the classroom.
-
+* Fortran Compiler
+* Ipopt > v3.12.7
+* CppAD
+* Eigen
 There's an experimental patch for windows in this [PR](https://github.com/udacity/CarND-PID-Control-Project/pull/3)
 
 ## Basic Build Instructions
@@ -84,7 +71,7 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 3. Compile: `cmake .. && make`
 4. Run it: `./mpc`. 
 
-Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
+
 
 
 
