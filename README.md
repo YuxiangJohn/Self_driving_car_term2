@@ -6,3 +6,6 @@ CarND term2 sensor fusion, localization and control
 * **Particle Filter Localization** -- Localize the vehicle in 2D map by Particle Filter.
 * **PID Control** -- PID control the car in a simulator.
 * **MPC Control** -- MPC control the car in a simulator, which performs better than PID.
+
+
+[Kalman Filter理论理解](https://zhuanlan.zhihu.com/p/36355083)
